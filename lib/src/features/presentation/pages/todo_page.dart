@@ -49,6 +49,17 @@ class TodoPage extends StatelessWidget {
           }
         },
       ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () {
+          // Adicione aqui a lógica para adicionar um novo Todo
+          todoController.addTodo(
+            title: 'New Todo',
+            description: 'This is a new todo.',
+            dateTime: DateTime.now(),
+          );
+        },
+      ),
     );
   }
 }

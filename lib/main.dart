@@ -3,7 +3,6 @@ import 'package:todo_app/src/extensions/firebase_extension.dart';
 import 'package:todo_app/src/features/data/repository/todo_repository.dart';
 import 'package:todo_app/src/features/presentation/controllers/todo_controller.dart';
 import 'package:todo_app/src/features/presentation/pages/todo_page.dart';
-import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
