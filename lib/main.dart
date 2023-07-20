@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:todo_app/src/extensions/firebase_extension.dart';
 import 'package:todo_app/src/features/data/repository/todo_repository.dart';
 import 'package:todo_app/src/features/presentation/controllers/todo_controller.dart';
-import 'package:todo_app/src/features/presentation/pages/todo_page.dart';
+
+import 'src/features/presentation/pages/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +24,7 @@ class MainApp extends StatelessWidget {
 
     return MaterialApp(
       home: Scaffold(
-        body: TodoPage(todoController: todoController),
+        body: HomePage(todoController: todoController),
       ),
     );
   }
