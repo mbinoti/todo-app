@@ -24,9 +24,12 @@ class HomePage extends StatelessWidget {
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2),
               itemBuilder: (context, index) {
-                return TaskTile(
-                  todo: snapshot.data![index],
-                  todoController: todoController,
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TaskTile(
+                    todo: snapshot.data![index],
+                    todoController: todoController,
+                  ),
                 );
               },
             );
