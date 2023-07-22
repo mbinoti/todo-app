@@ -26,9 +26,11 @@ class HomePage extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: TaskTile(
-                    todo: snapshot.data![index],
-                    todoController: todoController,
+                  child: GestureDetector(
+                    child: TaskTile(
+                      todo: snapshot.data![index],
+                      todoController: todoController,
+                    ),
                   ),
                 );
               },
