@@ -99,10 +99,10 @@ class TaskTile extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                 )),
-                // TaskMenu(
-                //   todo: todo,
-                //   todoController: todoController,
-                // ) // Removido por não saber o que faz
+                IconButton(
+                  icon: const Icon(Icons.delete, color: Colors.red),
+                  onPressed: () => todoController.deleteTodo(todo!.id!),
+                ),
               ],
             ),
             Expanded(

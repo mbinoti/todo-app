@@ -1,8 +1,6 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:todo_app/src/features/data/repository/todo_repository.dart';
 import 'package:todo_app/src/features/domain/models/todo.dart';
 import 'package:todo_app/src/utils/request_handlers.dart';
-import 'package:todo_app/src/utils/todo_usecase.dart';
 
 class TodoController {
   final TodoRepository _repository;

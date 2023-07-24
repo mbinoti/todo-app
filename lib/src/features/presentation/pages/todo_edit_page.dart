@@ -9,8 +9,6 @@ import 'package:todo_app/src/theme/app_theme.dart';
 import 'package:todo_app/src/utils/conversion.dart';
 import 'package:todo_app/src/utils/helpers.dart';
 import 'package:todo_app/src/utils/request_handlers.dart';
-import 'package:todo_app/src/utils/todo_usecase.dart';
-// import 'package:todo_app/src/utils/typedefs.dart';
 
 class TodoEditPage extends StatefulWidget {
   // final TodoRouteProps routeProps;
@@ -90,7 +88,7 @@ class _TodoEditPageState extends State<TodoEditPage> {
     return Scaffold(
         appBar: AppBar(
           title: CustomText(
-            value: widget.todo == null ? "Add Todo" : "Edit Todo",
+            value: widget.todo == null ? "adicionar tarefa" : "editar tarefa",
             fontSize: 17,
             fontWeight: FontWeight.w500,
             color: AppTheme.white,
@@ -102,17 +100,17 @@ class _TodoEditPageState extends State<TodoEditPage> {
             child: Column(
               children: [
                 TaskTextField(
-                    controller: titleController, hintText: "Provide a name.."),
+                    controller: titleController, hintText: "digite um nome.."),
                 Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     child: TaskTextField(
                         controller: descriptionController,
                         maxLines: 6,
-                        hintText: "Enter the description..")),
+                        hintText: "digite a descrição..")),
                 ListTile(
                     leading: const Icon(Icons.date_range),
                     title: const CustomText(
-                      value: "When you want to perform this task?",
+                      value: "Quando você deseja executar esta tarefa?",
                     ),
                     subtitle: ValueListenableBuilder<DateTime?>(
                       valueListenable: dateTime,
@@ -129,7 +127,7 @@ class _TodoEditPageState extends State<TodoEditPage> {
                     )),
                 const SizedBox(height: 30),
                 PrimaryButton(
-                  labelText: "Save",
+                  labelText: "gravar",
                   onPressed: saveButtonHandler,
                 ),
               ],
