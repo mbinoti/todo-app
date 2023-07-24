@@ -10,7 +10,7 @@ import 'package:todo_app/src/utils/conversion.dart';
 import 'package:todo_app/src/utils/helpers.dart';
 import 'package:todo_app/src/utils/request_handlers.dart';
 import 'package:todo_app/src/utils/todo_usecase.dart';
-import 'package:todo_app/src/utils/typedefs.dart';
+// import 'package:todo_app/src/utils/typedefs.dart';
 
 class TodoEditPage extends StatefulWidget {
   // final TodoRouteProps routeProps;
@@ -57,7 +57,7 @@ class _TodoEditPageState extends State<TodoEditPage> {
     if (todo.id != null) {
       // Editando um Todo existente
       widget.todoController
-          .handleEditTodo(
+          .EditTodo(
               todo: todo,
               handlers: RequestHandlers(
                 onError: ([message]) =>
@@ -71,7 +71,7 @@ class _TodoEditPageState extends State<TodoEditPage> {
     } else {
       // Adicionando um novo Todo
       widget.todoController
-          .handleAddTodo(
+          .AddTodo(
               todo: todo,
               handlers: RequestHandlers(
                 onError: ([message]) =>
