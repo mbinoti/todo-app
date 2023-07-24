@@ -11,6 +11,28 @@ class TodoController {
 
   Stream<List<Todo>> get todosStream => _repository.getTodos();
 
+  Future<void> handleAddTodo(
+      {required Todo todo, required RequestHandlers handlers}) async {
+    try {
+      handlers.onLoading!();
+      await _repository.addTodo(todo);
+      handlers.onSuccess!();
+    } catch (e) {
+      handlers.onError!(e.toString());
+    }
+  }
+
+  Future<void> handleEditTodo(
+      {required Todo todo, required RequestHandlers handlers}) async {
+    try {
+      handlers.onLoading!();
+      await _repository.updateTodo(todo);
+      handlers.onSuccess!();
+    } catch (e) {
+      handlers.onError!(e.toString());
+    }
+  }
+
   Future<void> handleAddOrEdit({
     required TodoUseCase? useCase,
     required Todo todo,

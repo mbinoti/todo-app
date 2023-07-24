@@ -13,10 +13,16 @@ import 'package:todo_app/src/utils/todo_usecase.dart';
 import 'package:todo_app/src/utils/typedefs.dart';
 
 class TodoEditPage extends StatefulWidget {
-  final TodoRouteProps routeProps;
+  // final TodoRouteProps routeProps;
   final TodoController todoController;
-  const TodoEditPage(
-      {super.key, required this.routeProps, required this.todoController});
+  final Todo? todo;
+
+  const TodoEditPage({
+    Key? key,
+    this.todo,
+    // required this.routeProps,
+    required this.todoController,
+  }) : super(key: key);
 
   @override
   State<TodoEditPage> createState() => _TodoEditPageState();
@@ -28,37 +34,55 @@ class _TodoEditPageState extends State<TodoEditPage> {
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
 
-  Todo? get previousTodo {
-    return widget.routeProps.todo;
-  }
+  // Todo? get previousTodo {
+  //   return widget.routeProps.todo;
+  // }
 
   @override
   void initState() {
     super.initState();
-    titleController.text = previousTodo?.title ?? "";
-    descriptionController.text = previousTodo?.description ?? "";
-    dateTime.value = previousTodo?.dateTime;
+    titleController.text = widget.todo?.title ?? "";
+    descriptionController.text = widget.todo?.description ?? "";
+    dateTime.value = widget.todo?.dateTime;
   }
 
   void saveButtonHandler() {
     final Todo todo = Todo(
-      id: widget.routeProps.todo?.id,
+      id: widget.todo?.id, // Este campo pode ser nulo para um novo Todo
       dateTime: dateTime.value,
       title: titleController.text.trim(),
       description: descriptionController.text.trim(),
     );
-    widget.todoController
-        .handleAddOrEdit(
-            useCase: widget.routeProps.useCase,
-            todo: todo,
-            handlers: RequestHandlers(
-              onError: ([message]) => Helpers.onErrorSnackbar(message, context),
-              onSuccess: () => Helpers.onSuccessSnackbar(context),
-              onLoading: () => Helpers.onLoadingSnackbar(context),
-            ))
-        .then((value) {
-      Navigator.pop(context);
-    });
+
+    if (todo.id != null) {
+      // Editando um Todo existente
+      widget.todoController
+          .handleEditTodo(
+              todo: todo,
+              handlers: RequestHandlers(
+                onError: ([message]) =>
+                    Helpers.onErrorSnackbar(message, context),
+                onSuccess: () => Helpers.onSuccessSnackbar(context),
+                onLoading: () => Helpers.onLoadingSnackbar(context),
+              ))
+          .then((_) {
+        Navigator.pop(context);
+      });
+    } else {
+      // Adicionando um novo Todo
+      widget.todoController
+          .handleAddTodo(
+              todo: todo,
+              handlers: RequestHandlers(
+                onError: ([message]) =>
+                    Helpers.onErrorSnackbar(message, context),
+                onSuccess: () => Helpers.onSuccessSnackbar(context),
+                onLoading: () => Helpers.onLoadingSnackbar(context),
+              ))
+          .then((_) {
+        Navigator.pop(context);
+      });
+    }
   }
 
   @override
@@ -66,9 +90,7 @@ class _TodoEditPageState extends State<TodoEditPage> {
     return Scaffold(
         appBar: AppBar(
           title: CustomText(
-            value: widget.routeProps.useCase == TodoUseCase.addTodo
-                ? "Add Todo"
-                : "Edit Todo",
+            value: widget.todo == null ? "Add Todo" : "Edit Todo",
             fontSize: 17,
             fontWeight: FontWeight.w500,
             color: AppTheme.white,
@@ -100,14 +122,12 @@ class _TodoEditPageState extends State<TodoEditPage> {
                       },
                     ),
                     trailing: CustomDatePicker(
-                      initialDate: widget.routeProps.todo?.dateTime,
+                      initialDate: widget.todo?.dateTime,
                       onDateSelected: (value) {
                         dateTime.value = value;
                       },
                     )),
-                const SizedBox(
-                  height: 30,
-                ),
+                const SizedBox(height: 30),
                 PrimaryButton(
                   labelText: "Save",
                   onPressed: saveButtonHandler,
