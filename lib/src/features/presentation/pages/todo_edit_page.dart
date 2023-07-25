@@ -32,10 +32,6 @@ class _TodoEditPageState extends State<TodoEditPage> {
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
 
-  // Todo? get previousTodo {
-  //   return widget.routeProps.todo;
-  // }
-
   @override
   void initState() {
     super.initState();
